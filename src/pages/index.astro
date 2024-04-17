@@ -4,15 +4,23 @@ import Layout from "../layouts/Layout.astro";
 import Profile from "../assets/profile.jpg";
 import Web from "../components/icons/Web.astro";
 import cv from "../data/cv.json";
+import { Github, Linkedin, Mail } from "../components/icons";
 
 const socialMedia = [
   {
     network: "LinkedIn",
     url: "https://www.linkedin.com/in/armando-diaz-291385251/",
+    icon: Linkedin,
   },
   {
     network: "GitHub",
     url: "https://github.com/adiazt01",
+    icon: Github,
+  },
+  {
+    network: "Mail",
+    url: "mailto:armandodt2004@gmail.com",
+    icon: Mail,
   },
 ];
 ---
@@ -32,7 +40,7 @@ const socialMedia = [
           {cv.basics.summary}
         </p>
         <div
-          class="flex flex-col items-center gap-8 justify-center sm:justify-start mt-4"
+          class="flex flex-col items-center gap-4 justify-center sm:justify-start mt-4"
         >
           <p class="text-lg text-neutral-600">
             <span class="flex flex-row items-center gap-2">
@@ -42,15 +50,21 @@ const socialMedia = [
               >
             </span>
           </p>
-          <ul>
+          <ul class="flex flex-row gap-2">
             {
-              cv.basics.profiles.map((profile) => (
-                <li>
+              socialMedia.map((social) => (
+                <li
+                  class="flex items
+                -center gap-2"
+                >
                   <a
-                    href={profile.url}
-                    class="text-neutral-600 hover:text-neutral-800"
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex items-center gap-2"
                   >
-                    {profile.network}
+                    <social.icon />
+                    <span>{social.network}</span>
                   </a>
                 </li>
               ))
