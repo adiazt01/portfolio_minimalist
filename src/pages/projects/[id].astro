@@ -1,0 +1,84 @@
+---
+import type { GetStaticPaths } from "astro";
+import { PROJECTS } from "../../data/Projects";
+import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import { Github, Link } from "../../components/icons";
+
+export const getStaticPaths = (() => {
+  return PROJECTS.map((project) => ({
+    params: {
+      id: project.id.toString(),
+    },
+  }));
+}) satisfies GetStaticPaths;
+
+const { id } = Astro.params;
+
+let project = null;
+
+if (id) {
+  project = PROJECTS.find((project) => project.id === parseInt(id));
+}
+
+if (!project) {
+  throw new Error(`Project not found for id: ${id}`);
+}
+
+const { description, img, github, techStack, title, url } = project.page;
+---
+
+<Layout title={`Proyecto ${title}`}>
+  <main
+    class="flex items-center justify-center w-full flex-col max-w-screen-md mx-auto px-4 sm:px-12 py-2"
+  >
+  <div class="w-full flex flex-row justify-start">
+    <a href="/" class="text-blue-500 mb-4">← Volver</a>
+  </div>
+    <h1 class="text-4xl font-bold mb-4">{title}</h1>
+    <div class="flex flex-col gap-4 items-center justify-center w-full">
+      <picture class="w-full">
+        <Image
+          class="rounded-lg"
+          src={img}
+          alt={title}
+          width={800}
+          height={600}
+        />
+      </picture>
+      <div class="flex flex-wrap">
+        {
+          techStack.map((tech) => (
+            <span class="bg-gray-200 text-gray-800 px-2 py-1 rounded-full text-sm mr-2 mb-2">
+              {tech}
+            </span>
+          ))
+        }
+      </div>
+      <div class="w-full">
+        <p class="text-lg leading-6">{description}</p>
+      </div>
+      <div class="flex w-full gap-4 flex-row sm:justify-end justify-center items-start">
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex flex-row text-md items-center gap-2 text-white border-2 px-2 py-1 rounded-lg bg-green-700 hover:bg-green-600 transition-colors duration-300"
+        >
+          <Link />
+          Visitar Sitio
+        </a>
+        <a
+          href={github}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex flex-row text-md items-center gap-2 text-white border-2 px-2 py-1 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors duration-300"
+
+        >
+        <Github />
+          Repositorio
+        </a>
+      </div>
+    </div>
+  </main>
+</Layout>

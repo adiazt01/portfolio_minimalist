@@ -4,7 +4,8 @@ import Layout from "../layouts/Layout.astro";
 import Profile from "../assets/profile.jpg";
 import Web from "../components/icons/Web.astro";
 import cv from "../data/cv.json";
-import { Github, Linkedin, Mail } from "../components/icons";
+import PROJECTS from "../data/projects.json";
+import { Github, Linkedin, Mail, Calendar, Link } from "../components/icons";
 
 const socialMedia = [
   {
@@ -23,26 +24,39 @@ const socialMedia = [
     icon: Mail,
   },
 ];
+
+const WORK_EXPERIENCE = [
+  {
+    company: "Silvera Enterprises",
+    location: "Remoto",
+    startDate: "01/2024",
+    endDate: "03/2024",
+    companyUrl: "https://striveenterprise.com/es/",
+    position: "Desarrollador Front end",
+    description:
+      "Participando en el proyecto que permitio la creacion de una landing page usando WordPress, Costum Fields y ACF. Utilizando HTML, CSS, JavaScript y PHP para el desarrollo.",
+  },
+];
 ---
 
 <Layout title="Portfolio - Armando Diaz">
   <main
-    class="flex items-center justify-center w-full flex-col max-w-screen-lg mx-auto px-12 py-8"
+    class="flex items-center justify-center w-full flex-col max-w-screen-md mx-auto px-4 sm:px-12 py-8"
   >
     <header
       class="flex gap-4 sm:flex-row items-center sm:items-start flex-col-reverse w-full justify-between"
     >
-      <article class="sm:mt-0 text-center md:text-left mt-4 max-w-md">
+      <article class="sm:mt-0 text-center sm:text-left mt-4 max-w-md">
         <h1 class="text-4xl">
           {cv.basics.name}
         </h1>
-        <p class="text-xl mt-2 leading-6 text-neutral-700 font-medium">
+        <p class="text-xl mt-2 leading-6 text-neutral-700">
           {cv.basics.summary}
         </p>
         <div
-          class="flex flex-col items-center gap-4 justify-center sm:justify-start mt-4"
+          class="flex flex-col items-centers sm:items-start gap-2 justify-center sm:justify-start mt-4"
         >
-          <p class="text-lg text-neutral-600">
+          <p class="text-lg mx-auto sm:mr-auto sm:mx-0 px-1 text-neutral-600">
             <span class="flex flex-row items-center gap-2">
               <Web />
               <span>
@@ -50,7 +64,7 @@ const socialMedia = [
               >
             </span>
           </p>
-          <ul class="flex flex-row gap-2">
+          <ul class="flex justify-center sm:justify-start flex-row gap-2">
             {
               socialMedia.map((social) => (
                 <li
@@ -61,7 +75,7 @@ const socialMedia = [
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="flex items-center gap-2"
+                    class="flex border px-3 rounded text-neutral-600 py-0.5 items-center gap-2 bg-white shadow-sm hover:scale-105 hover:shadow-md transition duration-300 ease-in-out"
                   >
                     <social.icon />
                     <span>{social.network}</span>
@@ -71,7 +85,6 @@ const socialMedia = [
             }
           </ul>
         </div>
-        <footer></footer>
       </article>
       <picture
         class="relative sm:ml-auto sm:mx-0 mx-auto w-44 h-44 rounded-md shadow overflow-hidden"
@@ -83,7 +96,83 @@ const socialMedia = [
         />
       </picture>
     </header>
+    <section class="mt-12 w-full">
+      <h2 class="text-3xl font-medium text-center sm:text-left">Sobre mi</h2>
+      <p class="text-lg text-neutral-600 leading-7">
+        Como desarrollador de Full Stack, he creado un producto y multiples
+        proyectos de software que aportan valor a los usuarios. Trabajo desde
+        hace año con tecnologias tales como JavaScript, TypeScript, React,
+        Next.js ,Node.js, MongoDB, PostgreSQL, entre otras. Me gusta aprender y
+        experimentar con nuevas tecnologias y metodologias de desarrollo.
+      </p>
+    </section>
+    <section class="mt-12 w-full">
+      <h2 class="text-3xl font-medium text-center sm:text-left">
+        Experiencia laboral
+      </h2>
+      <ul class="flex flex-col w-full">
+        {
+          WORK_EXPERIENCE.map((work) => (
+            <article class="mt-4">
+              <header class="flex flex-row justify-between">
+                <div class="flex text-xl items-center flex-row mr-auto">
+                  <h3 class="text-xl font-medium">{work.company}</h3>
+                  <p class="text-neutral-100 text-xs px-2 rounded-md py-0.5 ml-2 bg-neutral-500/50">
+                    {work.location}
+                  </p>
+                </div>
+                <div class="text-neutral-600">
+                  <time class="flex flex-row items-center gap-2">
+                    <Calendar />
+                    <span>
+                      {work.startDate} - {work.endDate}
+                    </span>
+                  </time>
+                </div>
+              </header>
+              <div class="mt-2">
+                <h4 class="text-md text-neutral-600">{work.position}</h4>
+                <p>{work.description}</p>
+              </div>
+            </article>
+          ))
+        }
+      </ul>
+    </section>
+    <section class="mt-12 w-full">
+      <h2 class="text-3xl font-medium text-center sm:text-left">Proyectos</h2>
+      <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+        {
+          PROJECTS.map((project) => (
+            <article class="flex border p-3 rounded bg-white flex-col overflow-hidden gap-1">
+              <header class="flex flex-row justify-between">
+                <h3 class="text-md font-medium">
+                  {project.name}
+                  <div class="w-2 ml-1.5 mb-0.5 animate-pulse h-2 rounded-full inline-block bg-green-500" />
+                </h3>
+              </header>
+              <p class="text-neutral-600 text-sm">{project.description}</p>
+              <ul class="flex mt-1 flex-row flex-wrap gap-2">
+                {project.techStack.map((tech) => (
+                  <li class="flex items-center gap-1 px-2.5 py-0.5 bg-neutral-800/60 text-xs rounded-2xl text-neutral-100">
+                    {tech}
+                  </li>
+                ))}
+              </ul>
+              <div class="flex justify-end gap-2">
+                <a
+                  href={`projects/${project.id}`}
+                  class="flex items-center gap-2 text-neutral-600 mt-2 hover:text-neutral-500"
+                >
+                  <span>Mas informacion</span>
+                  <Link />
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </ul>
+    </section>
+    <style></style>
   </main>
 </Layout>
-
-<style></style>

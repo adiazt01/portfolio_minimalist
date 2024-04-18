@@ -1,0 +1,1 @@
+export {default as ShortBuddy} from './Shortbuddy.png';
