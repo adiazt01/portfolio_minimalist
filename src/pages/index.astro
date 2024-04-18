@@ -1,11 +1,8 @@
 ---
-import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
-import Profile from "../assets/profile.jpg";
-import Web from "../components/icons/Web.astro";
-import cv from "../data/cv.json";
 import PROJECTS from "../data/projects.json";
 import { Github, Linkedin, Mail, Calendar, Link } from "../components/icons";
+import Hero from "../components/sections/Hero.astro";
 
 const socialMedia = [
   {
@@ -37,65 +34,21 @@ const WORK_EXPERIENCE = [
       "Participando en el proyecto que permitio la creacion de una landing page usando WordPress, Costum Fields y ACF. Utilizando HTML, CSS, JavaScript y PHP para el desarrollo.",
   },
 ];
+
+const CERTIFICATES = [
+  {
+    company: "FreeCodeCamp",
+    name: "Responsive Web Design",
+    url: "https://www.freecodecamp.org/certification/adiazt01/responsive-web-design",
+  },
+];
 ---
 
 <Layout title="Portfolio - Armando Diaz">
   <main
     class="flex items-center justify-center w-full flex-col max-w-screen-md mx-auto px-4 sm:px-12 py-8"
   >
-    <header
-      class="flex gap-4 sm:flex-row items-center sm:items-start flex-col-reverse w-full justify-between"
-    >
-      <article class="sm:mt-0 text-center sm:text-left mt-4 max-w-md">
-        <h1 class="text-4xl">
-          {cv.basics.name}
-        </h1>
-        <p class="text-xl mt-2 leading-6 text-neutral-700">
-          {cv.basics.summary}
-        </p>
-        <div
-          class="flex flex-col items-centers sm:items-start gap-2 justify-center sm:justify-start mt-4"
-        >
-          <p class="text-lg mx-auto sm:mr-auto sm:mx-0 px-1 text-neutral-600">
-            <span class="flex flex-row items-center gap-2">
-              <Web />
-              <span>
-                {cv.basics.location.city}, {cv.basics.location.country}</span
-              >
-            </span>
-          </p>
-          <ul class="flex justify-center sm:justify-start flex-row gap-2">
-            {
-              socialMedia.map((social) => (
-                <li
-                  class="flex items
-                -center gap-2"
-                >
-                  <a
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="flex border px-3 rounded text-neutral-600 py-0.5 items-center gap-2 bg-white shadow-sm hover:scale-105 hover:shadow-md transition duration-300 ease-in-out"
-                  >
-                    <social.icon />
-                    <span>{social.network}</span>
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-      </article>
-      <picture
-        class="relative sm:ml-auto sm:mx-0 mx-auto w-44 h-44 rounded-md shadow overflow-hidden"
-      >
-        <Image
-          src={Profile}
-          alt="Astro Logo"
-          class="absolute object-cover top-0 left-0 w-full h-full"
-        />
-      </picture>
-    </header>
+    <Hero />
     <section class="mt-12 w-full">
       <h2 class="text-3xl font-medium text-center sm:text-left">Sobre mi</h2>
       <p class="text-lg text-neutral-600 leading-7">
@@ -114,8 +67,8 @@ const WORK_EXPERIENCE = [
         {
           WORK_EXPERIENCE.map((work) => (
             <article class="mt-4">
-              <header class="flex flex-row justify-between">
-                <div class="flex text-xl items-center flex-row mr-auto">
+              <header class="flex flex-col sm:flex-row justify-between">
+                <div class="flex text-xl items-center mr-auto">
                   <h3 class="text-xl font-medium">{work.company}</h3>
                   <p class="text-neutral-100 text-xs px-2 rounded-md py-0.5 ml-2 bg-neutral-500/50">
                     {work.location}
@@ -173,6 +126,29 @@ const WORK_EXPERIENCE = [
         }
       </ul>
     </section>
-    <style></style>
+    <section class="mt-12 w-full">
+      <h2 class="text-3xl font-medium text-center sm:text-left">
+        Certificados
+      </h2>
+      <ol class="relative border-s border-gray-200">
+        <li class="mb-10 ms-4">
+          <div
+            class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white"
+          >
+          </div>
+          <time class="mb-1 text-sm font-normal leading-none text-gray-400"
+            >February 2022</time
+          >
+          <h3 class="text-lg font-semibold text-gray-900"></h3>
+          <p class="mb-4 text-base font-normal text-gray-500">
+            Learn how to build a responsive web application using Tailwind CSS
+            and JavaScript
+          </p>
+          <a href="#" class="text-base font-semibold text-green-600">
+            Ver certificado
+          </a>
+        </li>
+      </ol>
+    </section>
   </main>
 </Layout>
