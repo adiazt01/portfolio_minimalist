@@ -1,0 +1,38 @@
+---
+import { WORK_EXPERIENCE } from "../../data/Experience";
+import { Calendar } from "../icons";
+---
+
+<section class="mt-12 w-full">
+    <h2 class="text-3xl font-medium text-center sm:text-left">
+      Experiencia laboral
+    </h2>
+    <ul class="flex flex-col w-full">
+      {
+        WORK_EXPERIENCE.map((work) => (
+          <article class="mt-4">
+            <header class="flex flex-col sm:flex-row justify-between">
+              <div class="flex text-xl items-center mr-auto">
+                <h3 class="text-xl font-medium">{work.company}</h3>
+                <p class="text-neutral-100 text-xs px-2 rounded-md py-0.5 ml-2 bg-neutral-500/50">
+                  {work.location}
+                </p>
+              </div>
+              <div class="text-neutral-600">
+                <time class="flex flex-row items-center gap-2">
+                  <Calendar />
+                  <span>
+                    {work.startDate} - {work.endDate}
+                  </span>
+                </time>
+              </div>
+            </header>
+            <div class="mt-2">
+              <h4 class="text-md text-neutral-600">{work.position}</h4>
+              <p>{work.description}</p>
+            </div>
+          </article>
+        ))
+      }
+    </ul>
+  </section>
