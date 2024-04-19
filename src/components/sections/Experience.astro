@@ -14,7 +14,7 @@ import { Calendar } from "../icons";
             <header class="flex flex-col sm:flex-row justify-between">
               <div class="flex text-xl items-center mr-auto">
                 <h3 class="text-xl font-medium">{work.company}</h3>
-                <p class="text-neutral-100 text-xs px-2 rounded-md py-0.5 ml-2 bg-neutral-500/50">
+                <p class="text-neutral-100 text-xs px-2 rounded-md py-0.5 ml-2 bg-green-600">
                   {work.location}
                 </p>
               </div>
@@ -27,9 +27,9 @@ import { Calendar } from "../icons";
                 </time>
               </div>
             </header>
-            <div class="mt-2">
-              <h4 class="text-md text-neutral-600">{work.position}</h4>
-              <p>{work.description}</p>
+            <div class="mt-1">
+              <h4 class="text-md font-medium text-green-700">{work.position}</h4>
+              <p class="text-sm text-neutral-700">{work.description}</p>
             </div>
           </article>
         ))

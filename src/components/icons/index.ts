@@ -6,3 +6,4 @@ export { default as Linkedin } from "./Linkedin.astro"
 // Icons for misc
 export { default as Link } from "./Link.astro"
 export {default as Calendar} from "./Calendar.astro"
+export {default as ArrowUp} from "./ArrowUp.astro"
