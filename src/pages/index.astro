@@ -1,11 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import PROJECTS from "../data/projects.json";
-import { Github, Linkedin, Mail, Calendar, Link } from "../components/icons";
 import Hero from "../components/sections/Hero.astro";
 import Experience from "../components/sections/Experience.astro";
 import About from "../components/sections/About.astro";
-
+import Projects from "../components/sections/Projects.astro";
+import Certificates from "../components/sections/Certificates.astro";
 ---
 
 <Layout title="Portfolio - Armando Diaz">
@@ -15,5 +14,7 @@ import About from "../components/sections/About.astro";
     <Hero />
     <About />
     <Experience />
+    <Projects />
+    <Certificates />
   </main>
 </Layout>
